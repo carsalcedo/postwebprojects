@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/postsAction';
+import nerd from '../../images/nerd.jpg'
 
 const Form = ({currentId, setCurrentId}) => {
     const [postData, setPostData] = useState({
@@ -49,6 +50,7 @@ const Form = ({currentId, setCurrentId}) => {
     if (!user?.result?.name) {
       return (
         <Paper className={classes.paper}>
+          <img src={nerd} style={{width: "10rem", height: 'auto', marginLeft: 'auto', marginRight: 'auto'}}/>
           <Typography variant="h6" align="center">
             Please Sign In to post your own web projects and can like other's.
           </Typography>

@@ -9,6 +9,9 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   form: {
     display: 'flex',
