@@ -1,12 +1,9 @@
 import React from 'react'
 
 const PostDetails = () => {
-    console.log('POST DETAILS');
+    console.log('post details');
   return (
-    <div>
-        POST DETAILS
-
-    </div>
+    <div>PostDetails</div>
   )
 }
 
