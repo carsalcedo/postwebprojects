@@ -1,5 +1,8 @@
+import express from 'express';
 import PostMessage from "../models/postMessage.js";
 import mongoose from 'mongoose';
+
+const router = express.Router();
 
 
 export const getPosts = async (req, res) => {
@@ -74,11 +77,11 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const { id } = req.params;
-    const { title, message, creator, selectedFile, tags } = req.body;
+    const { title, message, creator, selectedFile, tags, link } = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+    const updatedPost = { creator, title, message, tags, link, selectedFile, _id: id };
 
     await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
 
@@ -116,3 +119,18 @@ export const likePost = async (req, res) => {
     
     res.json(updatedPost);
 }
+
+export const commentPost = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const post = await PostMessage.findById(id);
+
+    post.comments.push(value);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
+    res.json(updatedPost);
+};
+
+export default router;

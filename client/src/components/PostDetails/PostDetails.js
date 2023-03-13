@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { getPost, getPostsBySearch } from '../../actions/posts';
-//import CommentSection from './CommentSection';
+import CommentSection from './CommentSection';
 import useStyles from './styles';
 
 const PostDetails = () => {
@@ -49,11 +49,13 @@ const PostDetails = () => {
           <Typography variant="h3" component="h2">{post.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
+          <Typography gutterBottom variant="body1" component="p">
+            <a href={post.link} target='_blank' rel="noreferrer">Go to page</a>
+          </Typography>
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Divider style={{ margin: '20px 0' }} />
-        {/*  <CommentSection post={post} /> */}
+          <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
@@ -66,7 +68,7 @@ const PostDetails = () => {
           <Typography gutterBottom variant="h5">You might also like:</Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+            {recommendedPosts.map(({ title, name, likes, selectedFile, _id }) => (
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
                 <Typography gutterBottom variant="h6">{title}</Typography>
                 <Typography gutterBottom variant="subtitle2">{name}</Typography>

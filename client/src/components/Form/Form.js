@@ -6,13 +6,14 @@ import {useDispatch, useSelector} from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 import nerd from '../../images/nerd.jpg'
 import { useHistory } from 'react-router-dom';
-//quede en hora 6:36
+
 
 const Form = ({currentId, setCurrentId}) => {
     const [postData, setPostData] = useState({
         title: '',
         message: '',
         tags: '',
+        link: '',
         selectedFile: ''
     })
     const post = useSelector((state) => (currentId ? state.posts.posts.find((p) => p._id === currentId) : null));
@@ -42,7 +43,7 @@ const Form = ({currentId, setCurrentId}) => {
 
     const clear = () =>{
         setCurrentId(null);
-        setPostData({  title: '', message: '', tags: '', selectedFile: '' });
+        setPostData({  title: '', message: '', tags: '', link: '', selectedFile: '' });
     }
 
     if (!user?.result?.name) {
@@ -76,6 +77,14 @@ const Form = ({currentId, setCurrentId}) => {
                 fullWidth
                 value={postData.message}
                 onChange={(e)=> setPostData({...postData, message: e.target.value})}
+             />
+            <TextField
+                name='link' 
+                variant='outlined' 
+                label='link' 
+                fullWidth
+                value={postData.link}
+                onChange={(e)=> setPostData({...postData, link: e.target.value})}
              />
             <TextField
                 name='tags' 
